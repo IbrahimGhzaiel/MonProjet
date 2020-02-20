@@ -1,0 +1,38 @@
+<%@page import="java.util.ArrayList"%>
+<%@page import="fr.eni_ecole.jee.bean.*" %>
+ <script type="text/javascript" src="../js/ajax.js"></script>
+ <script type="text/javascript" src="../js/inscriptions.js"></script>
+
+<form class="connexion" action="<%=request.getContextPath()%>/stagiaire/formations" method="get">
+		<div class="bloc_connexion">
+			
+			<select id="nonInscrit" name="nonInscrit" multiple="multiple" size="5">
+			<%
+				ArrayList<Formation> non;
+				non=(ArrayList<Formation>)request.getAttribute("nonInscrit");
+				for(Formation f:non)
+				{
+					%>
+					<option value="<%=f.getId() %>"><%=f.getLibelle() %></option>
+					<%
+				}
+			%>
+			</select>
+		
+			<input id="add" type="button" onclick="executerRequete('<%=request.getContextPath()%>/stagiaire/formations',getSelectValues('nonInscrit','nonInscrit')+'action=ajouter',ok, err)" value="inscrire"/>
+			<input id="suppr" type="button" onclick="executerRequete('<%=request.getContextPath()%>/stagiaire/formations',getSelectValues('inscrit','inscrit')+'action=supprimer',ok, err)" value="supprimer"/>
+					
+			<select id="inscrit" name="inscrit" multiple="multiple" size="5">
+			<%
+				ArrayList<Formation> ins;
+				ins=(ArrayList<Formation>)request.getAttribute("inscrit");
+				for(Formation f:ins)
+				{
+					%>
+					<option value="<%=f.getId() %>"><%=f.getLibelle() %></option>
+					<%
+				}
+			%>
+			</select>
+		</div>
+		</form>

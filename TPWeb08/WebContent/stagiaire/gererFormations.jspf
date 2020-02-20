@@ -1,0 +1,38 @@
+<%@page import="java.util.ArrayList"%>
+<%@page import="fr.eni_ecole.jee.bean.*" %>
+
+<form class="connexion" action="<%=request.getContextPath()%>/stagiaire/formations" method="get">
+		<div class="bloc_connexion">
+			
+			<select name="nonInscrit" multiple="multiple" size="5">
+			<%
+				ArrayList<Formation> non;
+				non=(ArrayList<Formation>)request.getAttribute("nonInscrit");
+				for(Formation f:non)
+				{
+					%>
+					<option value="<%=f.getId() %>"><%=f.getLibelle() %></option>
+					<%
+				}
+			%>
+			</select>
+		
+			<input type="submit" name="action" value="ajouter"/>
+			
+			<input type="submit" name="action" value="supprimer" />
+			
+			
+			<select name="inscrit" multiple="multiple" size="5">
+			<%
+				ArrayList<Formation> ins;
+				ins=(ArrayList<Formation>)request.getAttribute("inscrit");
+				for(Formation f:ins)
+				{
+					%>
+					<option value="<%=f.getId() %>"><%=f.getLibelle() %></option>
+					<%
+				}
+			%>
+			</select>
+		</div>
+		</form>
